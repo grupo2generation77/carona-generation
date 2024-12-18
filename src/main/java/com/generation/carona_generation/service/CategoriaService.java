@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,6 +39,17 @@ public class CategoriaService {
             return categoriaRepository.findById(id);
         }
         throw new HttpClientErrorException(HttpStatus.NOT_FOUND,"Categoria com o id " + id +" não encontrada");
+    }
+
+    public Categoria update(Categoria categoria) {
+        // Verifica se a categoria existe
+        return categoriaRepository.findById(categoria.getId())
+                .map(existingCategoria -> {
+                    // Atualiza os dados da categoria
+                    existingCategoria.setNome(categoria.getNome());
+                    return categoriaRepository.save(existingCategoria); // Salva a categoria atualizada
+                })
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Categoria não encontrada"));
     }
 
 
