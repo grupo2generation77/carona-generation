@@ -197,14 +197,43 @@ O projeto é hospedado na plataforma **Render** e utiliza **Docker** para contai
 
 ---
 
-## 👥 **Integrantes**
+## 👥 **Colaboradores**
 
-- **Ivan**
-- **Vitória**
-- **Matheus Queiroz**
-- **Lucas O**
-- **Nina**
-- **Jaqueline**
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/MatheusSPQ">
+        <img src="https://avatars.githubusercontent.com/u/88354550?v=4" width="125px;" alt="Colaborador Matheus Queiroz"/><br />
+        <sub><b>Matheus Queiroz</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Ninaraquel">
+        <img src="https://avatars.githubusercontent.com/u/163758090?v=4" width="125px;" alt="Colaboradora Nina Raquel"/><br />
+        <sub><b>Nina Raquel</b></sub>
+      </a>
+    </td>
+        <td align="center">
+      <a href="https://github.com/lucassai">
+        <img src="https://avatars.githubusercontent.com/u/145879455?v=4" width="125px;" alt="Colaborador Lucas Oliveira"/><br />
+        <sub><b>Lucas Oliveira</b></sub>
+      </a>
+    </td>
+          <td align="center">
+      <a href="https://github.com/IJNavi">
+        <img src="https://avatars.githubusercontent.com/u/134899476?v=4" width="125px;" alt="Colaborador Ivan Barbosa"/><br />
+        <sub><b>Ivan Barbosa</b></sub>
+      </a>
+    </td>
+    </td>
+          <td align="center">
+      <a href="https://github.com/Jaquelinevalle">
+        <img src="https://avatars.githubusercontent.com/u/184864400?v=4" width="125px;" alt="Colaboradora Jaqueline Valle"/><br />
+        <sub><b>Jaqueline Valle</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
 
 ---
 
