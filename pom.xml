@@ -124,7 +124,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.generation</groupId>
-			<artifactId>blogpessoal</artifactId>
+			<artifactId>carona-generation</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
