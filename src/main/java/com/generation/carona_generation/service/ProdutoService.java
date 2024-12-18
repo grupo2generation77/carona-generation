@@ -5,9 +5,15 @@ import com.generation.carona_generation.model.Produto;
 import com.generation.carona_generation.model.Usuario;
 import com.generation.carona_generation.repository.CategoriaRepository;
 import com.generation.carona_generation.repository.ProdutoRepository;
+
+import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -77,6 +83,19 @@ public class ProdutoService {
         throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Produto com o id " + id + " não encontrado");
     }
 
+    @Transactional
+    public void delete(Long id) {
+        Optional<Produto> produto = produtoRepository.findById(id);
+
+        // Verifica se o produto existe
+        if (produto.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado");
+        }
+
+        // Deleta o produto
+        produtoRepository.deleteById(id);
+    }
+    
     public Produto updateProduto(Produto produto) {
         // Verifica se o produto existe
         if (!produtoRepository.existsById(produto.getId())) {
