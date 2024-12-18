@@ -2,6 +2,7 @@ package com.generation.carona_generation.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -21,6 +22,7 @@ public class Usuario {
     @Size(min = 2, max = 100)
     private String nome;
 
+    @Schema(example = "email@email.com.br")
     @NotBlank(message = "O atributo email é obrigatorio")
     @Email(message = "O Atributo Usuário deve ser um email válido!")
     private String usuario;
@@ -31,14 +33,15 @@ public class Usuario {
 
     private String modeloCarro;
 
-    private Float avaliacao = (float) 0.0;
+    private Float avaliacao = (float) 5.0;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "usuario")
     @JsonIgnoreProperties("usuario")
     private List<Produto> produtos;
 
-    public Usuario(String nome, String usuario, String senha, String modeloCarro, Float avaliacao) {
-        this.nome = nome;
+    public Usuario(Long id, String nome, String usuario, String senha, String modeloCarro, Float avaliacao) {
+        this.id = id;
+    	this.nome = nome;
         this.usuario = usuario;
         this.senha = senha;
         this.modeloCarro = modeloCarro;
