@@ -39,8 +39,9 @@ public class Usuario {
     @JsonIgnoreProperties("usuario")
     private List<Produto> produtos;
 
-    public Usuario(String nome, String usuario, String senha, String modeloCarro, Float avaliacao) {
-        this.nome = nome;
+    public Usuario(Long id, String nome, String usuario, String senha, String modeloCarro, Float avaliacao) {
+        this.id = id;
+    	this.nome = nome;
         this.usuario = usuario;
         this.senha = senha;
         this.modeloCarro = modeloCarro;
