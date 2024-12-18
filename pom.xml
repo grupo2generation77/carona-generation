@@ -73,21 +73,25 @@
 			</exclusions>
 		</dependency>
 
-		<!--
+		<!-- Dependência TEST -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		-->
 
-		<!--
+	 <!-- Dependência Spring Security -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+				<exclusions>
+    		<exclusion>
+    			<groupId>org.junit.vintage</groupId>
+    			<artifactId>junit-vintage-engine</artifactId>
+    		</exclusion>
+    	 </exclusions>
 		</dependency>
-		-->
-
+		
 		<!-- Dependências para Geração e Validação do Token JWT -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
@@ -118,9 +122,11 @@
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 			<version>2.7.0</version>
 		</dependency>
-
-
-
+		<dependency>
+			<groupId>com.generation</groupId>
+			<artifactId>blogpessoal</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>
