@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import com.generation.carona_generation.model.UsuarioLogin;
 import com.generation.carona_generation.model.Usuario;
 import com.generation.carona_generation.repository.UsuarioRepository;
-import com.generation.carona_gereration.security.JwtService;
+import com.generation.carona_generation.security.JwtService;
 
 
 @Service

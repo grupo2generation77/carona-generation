@@ -1,4 +1,4 @@
-package com.generation.carona_gereration.security;
+package com.generation.carona_generation.security;
 
 import java.security.Key;
 import java.util.Date;
