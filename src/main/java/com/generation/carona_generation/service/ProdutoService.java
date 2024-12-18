@@ -2,6 +2,7 @@ package com.generation.carona_generation.service;
 
 
 import com.generation.carona_generation.model.Produto;
+import com.generation.carona_generation.model.Usuario;
 import com.generation.carona_generation.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,12 +20,25 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     //Post
-    public Produto addProduto(Produto produto){
+    public Produto addProduto(Produto produto) throws HttpClientErrorException{
+        Long usuarioId = produto.getUsuario().getId();
+        System.out.println(usuarioId);
+        Optional<Usuario> usuario = usuarioService.getUsuarioById(usuarioId);
 
-        produto.setHorarioPrevistaoChegada(calculateHorarioChegada(produto));
 
-        return produtoRepository.save(produto);
+        if(usuario.get().getModeloCarro() != null){
+            produto.setHorarioPrevistaoChegada(calculateHorarioChegada(produto));
+
+            return produtoRepository.save(produto);
+        }
+
+        throw new HttpClientErrorException(HttpStatus.BAD_REQUEST,"O usuario precisa ter um carro para disponibilizar uma viagem");
+
+
     }
 
     //calculo para o horario de chegada
