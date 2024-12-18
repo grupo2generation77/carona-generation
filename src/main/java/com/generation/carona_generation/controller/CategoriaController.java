@@ -46,9 +46,18 @@ public class CategoriaController {
         }
     }
 
+
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         categoriaService.delete(id);  // Chama o serviço para deletar a categoria
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Categoria> update(@PathVariable Long id, @RequestBody Categoria categoria) {
+        categoria.setId(id);
+        Categoria categoriaAtualizada = categoriaService.update(categoria);
+        return ResponseEntity.ok(categoriaAtualizada); // Retorna o produto atualizado com status 200 OK
+    }
+
 }

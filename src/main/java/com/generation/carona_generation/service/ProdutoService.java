@@ -3,12 +3,14 @@ package com.generation.carona_generation.service;
 
 import com.generation.carona_generation.model.Produto;
 import com.generation.carona_generation.model.Usuario;
+import com.generation.carona_generation.repository.CategoriaRepository;
 import com.generation.carona_generation.repository.ProdutoRepository;
 
 import jakarta.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +28,8 @@ public class ProdutoService {
 
     @Autowired
     private ProdutoRepository produtoRepository;
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     @Autowired
     private UsuarioService usuarioService;
@@ -49,7 +53,7 @@ public class ProdutoService {
     }
 
     //calculo para o horario de chegada
-    public LocalDateTime calculateHorarioChegada(Produto produto){
+    public LocalDateTime calculateHorarioChegada(Produto produto) {
         BigDecimal distancia = produto.getDistancia();
         double velocidade = produto.getVelocidadeMedia();
         LocalDateTime horarioPartida = produto.getHorarioPartida();
@@ -74,10 +78,10 @@ public class ProdutoService {
     }
 
     public Optional<Produto> getProdutoById(Long id) throws HttpClientErrorException {
-        if(produtoRepository.existsById(id)) {
+        if (produtoRepository.existsById(id)) {
             return produtoRepository.findById(id);
         }
-        throw new HttpClientErrorException(HttpStatus.NOT_FOUND,"Produto com o id " + id +" não encontrado");
+        throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Produto com o id " + id + " não encontrado");
     }
 
     @Transactional
@@ -93,4 +97,19 @@ public class ProdutoService {
         produtoRepository.deleteById(id);
     }
     
+    public Produto updateProduto(Produto produto) {
+        // Verifica se o produto existe
+        if (!produtoRepository.existsById(produto.getId())) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado!", null);
+        }
+
+        // Verifica se a categoria existe
+        if (!categoriaRepository.existsById(produto.getCategoria().getId())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria não existe!", null);
+        }
+
+        // Atualiza o produto
+        return produtoRepository.save(produto);
+    }
 }
+

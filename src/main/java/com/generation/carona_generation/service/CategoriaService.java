@@ -59,5 +59,16 @@ public class CategoriaService {
         // Deleta a categoria
         categoriaRepository.deleteById(id);
     }
+    public Categoria update(Categoria categoria) {
+        // Verifica se a categoria existe
+        return categoriaRepository.findById(categoria.getId())
+                .map(existingCategoria -> {
+                    // Atualiza os dados da categoria
+                    existingCategoria.setNome(categoria.getNome());
+                    return categoriaRepository.save(existingCategoria); // Salva a categoria atualizada
+                })
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Categoria não encontrada"));
+    }
+
 
 }
