@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,6 +26,18 @@ public class CategoriaService {
 
         return Optional.of(categoriaRepository.save(categoria));
 
+    }
+
+    //Get
+    public List<Categoria> findAllCategorias() {
+        return categoriaRepository.findAll();
+    }
+
+    public Optional<Categoria> getCategoriaById(Long id) throws HttpClientErrorException {
+        if(categoriaRepository.existsById(id)) {
+            return categoriaRepository.findById(id);
+        }
+        throw new HttpClientErrorException(HttpStatus.NOT_FOUND,"Categoria com o id " + id +" não encontrada");
     }
 
 
