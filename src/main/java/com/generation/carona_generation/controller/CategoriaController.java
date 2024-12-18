@@ -2,8 +2,6 @@ package com.generation.carona_generation.controller;
 
 
 import com.generation.carona_generation.model.Categoria;
-import com.generation.carona_generation.repository.CategoriaRepository;
-import com.generation.carona_generation.model.Categoria;
 import com.generation.carona_generation.service.CategoriaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
 

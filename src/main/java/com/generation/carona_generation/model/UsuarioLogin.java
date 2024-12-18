@@ -8,8 +8,18 @@ public class UsuarioLogin {
     private String senha;
     private String modeloCarro;
     private Float avaliacao;
+    private String token;
+    
+    
+    public String getToken() {
+		return token;
+	}
 
-    public Long getId() {
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public Long getId() {
         return id;
     }
 
