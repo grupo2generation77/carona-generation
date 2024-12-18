@@ -31,7 +31,7 @@ public class Usuario {
 
     private String modeloCarro;
 
-    private Float avaliacao = (float) 0.0;
+    private Float avaliacao = (float) 5.0;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "usuario")
     @JsonIgnoreProperties("usuario")

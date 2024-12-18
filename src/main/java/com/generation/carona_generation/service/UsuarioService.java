@@ -8,12 +8,17 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.generation.carona_generation.model.UsuarioLogin;
 import com.generation.carona_generation.model.Usuario;
 import com.generation.carona_generation.repository.UsuarioRepository;
+
+import jakarta.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
+import java.util.List;
+
+import com.generation.carona_generation.model.UsuarioLogin;
 import com.generation.carona_generation.security.JwtService;
 
 
@@ -29,10 +34,11 @@ public class UsuarioService {
     @Autowired
     private AuthenticationManager authenticationManager;
     
-    public Optional<Usuario> cadastrarUsuario(Usuario usuario) {
+    public Optional<Usuario> addUsuario(Usuario usuario) throws HttpClientErrorException {
 
-		if (usuarioRepository.findByUsuario(usuario.getUsuario()).isPresent())
-			return Optional.empty();
+        if (usuarioRepository.findByUsuario(usuario.getUsuario()).isPresent()) {
+            throw new HttpClientErrorException(HttpStatus.CONFLICT, "Usuario ja existente");
+        }
 
 		usuario.setSenha(criptografarSenha(usuario.getSenha()));
 
@@ -104,6 +110,35 @@ public class UsuarioService {
 	private String gerarToken(String usuario) {
 		return "Bearer " + jwtService.generateToken(usuario);
 	}
+
+
+    //Get
+    public List<Usuario> getAllUsuarios() {
+        return usuarioRepository.findAll();
+    }
+
+    public Optional<Usuario> getUsuarioById(Long id) throws HttpClientErrorException {
+        if(usuarioRepository.existsById(id)) {
+            return usuarioRepository.findById(id);
+        }
+        throw new HttpClientErrorException(HttpStatus.NOT_FOUND,"Usuario com o id " + id +" não encontrado");
+    }
+
+
+    //Delete
+
+    @Transactional
+    public void delete(Long id) {
+        Optional<Usuario> usuario = usuarioRepository.findById(id);
+
+        // Verifica se o usuário existe
+        if (usuario.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
+        }
+
+        // Deleta o usuário
+        usuarioRepository.deleteById(id);
+    }
 
 }
 

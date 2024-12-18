@@ -30,7 +30,7 @@ public class Produto {
     @NotNull(message = "O atributo horario de partida é obrigatorio")
     private LocalDateTime horarioPartida;
 
-    private LocalDate horarioPrevistaoChegada;
+    private LocalDateTime horarioPrevistaoChegada;
 
     @NotBlank(message = "O atributo lugar de partida é obrigatorio")
     @Size(min = 2, max = 500)
@@ -46,10 +46,12 @@ public class Produto {
     @NotNull(message = "O atributo preco é obrigatorio")
     private Long preco;
 
+    @NotNull
     @ManyToOne
     @JsonIgnoreProperties("produtos")
     private Categoria categoria;
 
+    @NotNull
     @ManyToOne
     @JsonIgnoreProperties("produtos")
     private Usuario usuario;
@@ -94,27 +96,27 @@ public class Produto {
         this.horarioPartida = horarioPartida;
     }
 
-    public LocalDate getHorarioPrevistaoChegada() {
+    public LocalDateTime getHorarioPrevistaoChegada() {
         return horarioPrevistaoChegada;
     }
 
-    public void setHorarioPrevistaoChegada(LocalDate horarioPrevistaoChegada) {
+    public void setHorarioPrevistaoChegada(LocalDateTime horarioPrevistaoChegada) {
         this.horarioPrevistaoChegada = horarioPrevistaoChegada;
     }
 
-    public @NotBlank(message = "O atributo lugar de partida é obrigatorio") String getLugarPartida() {
+    public @NotBlank(message = "O atributo lugar de partida é obrigatorio") @Size(min = 2, max = 500) String getLugarPartida() {
         return lugarPartida;
     }
 
-    public void setLugarPartida(@NotBlank(message = "O atributo lugar de partida é obrigatorio") String lugarPartida) {
+    public void setLugarPartida(@NotBlank(message = "O atributo lugar de partida é obrigatorio") @Size(min = 2, max = 500) String lugarPartida) {
         this.lugarPartida = lugarPartida;
     }
 
-    public @NotBlank(message = "O atributo lugar de destino é obrigatorio") String getLugarDestino() {
+    public @NotBlank(message = "O atributo lugar de destino é obrigatorio") @Size(min = 2, max = 500) String getLugarDestino() {
         return lugarDestino;
     }
 
-    public void setLugarDestino(@NotBlank(message = "O atributo lugar de destino é obrigatorio") String lugarDestino) {
+    public void setLugarDestino(@NotBlank(message = "O atributo lugar de destino é obrigatorio") @Size(min = 2, max = 500) String lugarDestino) {
         this.lugarDestino = lugarDestino;
     }
 
@@ -134,19 +136,19 @@ public class Produto {
         this.preco = preco;
     }
 
-    public Categoria getCategoria() {
+    public @NotNull Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
+    public void setCategoria(@NotNull Categoria categoria) {
         this.categoria = categoria;
     }
 
-    public Usuario getUsuario() {
+    public @NotNull Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(@NotNull Usuario usuario) {
         this.usuario = usuario;
     }
 }
