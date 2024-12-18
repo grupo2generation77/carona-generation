@@ -4,11 +4,18 @@ package com.generation.carona_generation.service;
 import com.generation.carona_generation.model.Categoria;
 import com.generation.carona_generation.model.Usuario;
 import com.generation.carona_generation.repository.UsuarioRepository;
+
+import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -34,7 +41,6 @@ public class UsuarioService {
 
     }
 
-
     //private String encryptPassword(String senha) {
     //    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     //  return encoder.encode(senha);
@@ -52,5 +58,20 @@ public class UsuarioService {
         throw new HttpClientErrorException(HttpStatus.NOT_FOUND,"Usuario com o id " + id +" não encontrado");
     }
 
+    
+    //Delete
+    
+    @Transactional
+    public void delete(Long id) {
+        Optional<Usuario> usuario = usuarioRepository.findById(id);
+
+        // Verifica se o usuário existe
+        if (usuario.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
+        }
+
+        // Deleta o usuário
+        usuarioRepository.deleteById(id);
+    }
 
 }
