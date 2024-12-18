@@ -43,5 +43,11 @@ public class UsuarioController {
             return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
         }
     }
+    
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        usuarioService.delete(id);  // Chama o serviço para deletar o usuário
+    }
 
 }

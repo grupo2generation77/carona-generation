@@ -46,4 +46,9 @@ public class CategoriaController {
         }
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        categoriaService.delete(id);  // Chama o serviço para deletar a categoria
+    }
 }

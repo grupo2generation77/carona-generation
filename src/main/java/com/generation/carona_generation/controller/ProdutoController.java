@@ -49,4 +49,9 @@ public class ProdutoController {
 
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        produtoService.delete(id);  // Chama o serviço para deletar o produto
+    }
 }
