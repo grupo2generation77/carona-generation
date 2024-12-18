@@ -40,8 +40,13 @@ public class ProdutoController {
     }
 
     @PostMapping
-    public ResponseEntity<Produto> registerProduto(@Valid @RequestBody Produto produto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(produtoService.addProduto(produto));
+    public ResponseEntity<Object> registerProduto(@Valid @RequestBody Produto produto) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(produtoService.addProduto(produto));
+        }catch (HttpClientErrorException e) {
+            return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
+        }
+
     }
 
 }
