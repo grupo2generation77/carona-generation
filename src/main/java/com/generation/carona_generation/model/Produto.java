@@ -30,7 +30,7 @@ public class Produto {
     @NotNull(message = "O atributo horario de partida é obrigatorio")
     private LocalDateTime horarioPartida;
 
-    private LocalDate horarioPrevistaoChegada;
+    private LocalDateTime horarioPrevistaoChegada;
 
     @NotBlank(message = "O atributo lugar de partida é obrigatorio")
     @Size(min = 2, max = 500)
@@ -94,11 +94,11 @@ public class Produto {
         this.horarioPartida = horarioPartida;
     }
 
-    public LocalDate getHorarioPrevistaoChegada() {
+    public LocalDateTime getHorarioPrevistaoChegada() {
         return horarioPrevistaoChegada;
     }
 
-    public void setHorarioPrevistaoChegada(LocalDate horarioPrevistaoChegada) {
+    public void setHorarioPrevistaoChegada(LocalDateTime horarioPrevistaoChegada) {
         this.horarioPrevistaoChegada = horarioPrevistaoChegada;
     }
 
