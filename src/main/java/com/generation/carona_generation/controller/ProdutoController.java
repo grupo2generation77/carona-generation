@@ -49,4 +49,16 @@ public class ProdutoController {
 
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Produto> update(@PathVariable Long id, @RequestBody Produto produto) {
+        // Atribui o id do produto passado no URL ao objeto produto no corpo da requisição
+        produto.setId(id);
+
+        // Chama o serviço para atualizar o produto
+        Produto produtoAtualizado = produtoService.updateProduto(produto);
+
+        // Retorna o produto atualizado com o status HTTP 200 OK
+        return ResponseEntity.ok(produtoAtualizado);
+    }
+
 }

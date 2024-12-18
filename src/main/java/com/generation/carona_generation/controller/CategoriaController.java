@@ -46,4 +46,11 @@ public class CategoriaController {
         }
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Categoria> update(@PathVariable Long id, @RequestBody Categoria categoria) {
+        categoria.setId(id);
+        Categoria categoriaAtualizada = categoriaService.update(categoria);
+        return ResponseEntity.ok(categoriaAtualizada); // Retorna o produto atualizado com status 200 OK
+    }
+
 }
